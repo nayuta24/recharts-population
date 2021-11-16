@@ -17,5 +17,8 @@ export const Checkbox: VFC<Props> = (props) => {
 };
 
 const SLi = styled.li`
+  display: inline;
   list-style: none;
+  white-space: nowrap;
+  padding-right: 10px;
 `;
