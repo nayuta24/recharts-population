@@ -16,8 +16,4 @@ export const PrefectureCheckboxes = () => {
 
 const SDiv = styled.div`
   width: 100%;
-  text-align: left;
-  border: 1.5px solid;
-  border-color: #031de2;
-  border-radius: 15px;
 `;
