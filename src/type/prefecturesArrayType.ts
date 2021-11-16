@@ -1,8 +1,3 @@
-export type prefecturesArrayType = [
-    {
-        number: number,
-        name: string,
-        isChecked: boolean
-    }
-] |
-null
+import { prefecturesType } from "./prefectureType";
+
+export type prefecturesArrayType = [prefecturesType] | null

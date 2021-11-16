@@ -11,7 +11,7 @@ export const Checkbox: VFC<Props> = memo((props) => {
   return (
     <SLi key={key} data-testid="key">
       <input type="checkbox" />
-      <label htmlFor="checkPrefecture">{label}</label>
+      <SLabel htmlFor="checkPrefecture">{label}</SLabel>
     </SLi>
   );
 });
@@ -21,4 +21,8 @@ const SLi = styled.li`
   list-style: none;
   white-space: nowrap;
   padding-right: 10px;
+`;
+
+const SLabel = styled.label`
+  font-size: 12px;
 `;

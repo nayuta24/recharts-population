@@ -2,16 +2,11 @@ import { memo, VFC } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { prefectureState } from "../store/prefectureState";
+import { prefecturesType } from "../type/prefectureType";
 import { Checkbox } from "./checkbox/Checkbox";
 
 type Props = {
-  prefectures: [
-    {
-      number: number;
-      name: string;
-      isChecked: boolean;
-    }
-  ];
+  prefectures: [prefecturesType];
 };
 
 export const PrefectureCheckboxes: VFC<Props> = memo((props) => {

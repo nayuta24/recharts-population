@@ -45,8 +45,8 @@ const data = [
 export default function Chart() {
   return (
     <LineChart
-      width={500}
-      height={300}
+      width={350}
+      height={240}
       data={data}
       margin={{
         top: 5,

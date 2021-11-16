@@ -27,25 +27,29 @@ export const useGetPrefectures = () =>
             } )
             .then( ( res ) =>
             {
-                res.data.result.map( (data:responseType) =>
-                {
-                    if ( newPrefectures == null )
+                const result = res.data.result;
+
+                if(result){
+                    result.map( (data:responseType) =>
                     {
-                        newPrefectures = [ {
-                            number: data.prefCode,
-                            name: data.prefName,
-                            isChecked: false
-                        }]
-                    } else
-                    {
-                        newPrefectures.push( {
-                            number: data.prefCode,
-                            name: data.prefName,
-                            isChecked: false
-                        } )
-                    }
-                } )
-                setPrefectures( newPrefectures )
+                        if ( newPrefectures == null )
+                        {
+                            newPrefectures = [ {
+                                number: data.prefCode,
+                                name: data.prefName,
+                                isChecked: false
+                            }]
+                        } else
+                        {
+                            newPrefectures.push( {
+                                number: data.prefCode,
+                                name: data.prefName,
+                                isChecked: false
+                            } )
+                        }
+                    } )
+                    setPrefectures( newPrefectures )
+                }
             } )
             .catch();
     }
