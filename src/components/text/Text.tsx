@@ -1,4 +1,4 @@
-import { ReactNode, VFC } from "react";
+import { memo, ReactNode, VFC } from "react";
 import styled from "styled-components";
 
 type Props = {
@@ -6,10 +6,10 @@ type Props = {
   fontSize?: string;
 };
 
-export const Text: VFC<Props> = (props) => {
+export const Text: VFC<Props> = memo((props) => {
   const { children, fontSize } = props;
   return <SP fontSize={fontSize}>{children}</SP>;
-};
+});
 
 const SP = styled.p<{ fontSize?: string }>`
   font-size: ${(props) => props.fontSize || "10px"};

@@ -1,4 +1,4 @@
-import { VFC } from "react";
+import { memo, VFC } from "react";
 import styled from "styled-components";
 
 type Props = {
@@ -6,7 +6,7 @@ type Props = {
   key?: number;
 };
 
-export const Checkbox: VFC<Props> = (props) => {
+export const Checkbox: VFC<Props> = memo((props) => {
   const { label, key } = props;
   return (
     <SLi key={key} data-testid="key">
@@ -14,7 +14,7 @@ export const Checkbox: VFC<Props> = (props) => {
       <label htmlFor="checkPrefecture">{label}</label>
     </SLi>
   );
-};
+});
 
 const SLi = styled.li`
   display: inline;

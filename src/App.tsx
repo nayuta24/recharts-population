@@ -1,10 +1,22 @@
-import { prefectures } from "./array/prefecture";
+import { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import Chart from "./components/chart/Chart";
-import { Checkbox } from "./components/checkbox/Checkbox";
 import { PrefectureCheckboxes } from "./components/PrefectureCheckboxes";
 import { Text } from "./components/text/Text";
+import { useGetPrefectures } from "./hooks/useGetPrefectures";
+import { prefectureState } from "./store/prefectureState";
 
 function App() {
+  const { getPrefectures } = useGetPrefectures();
+  const prefectures = useRecoilValue(prefectureState);
+  useEffect(() => {
+    getPrefectures();
+  }, []);
+
+  useEffect(() => {
+    console.log(prefectures);
+  }, [prefectures]);
+
   return (
     <div className="App">
       <body>

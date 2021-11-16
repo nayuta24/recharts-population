@@ -1,8 +1,9 @@
+import { memo } from "react";
 import styled from "styled-components";
 import { prefectures } from "../array/prefecture";
 import { Checkbox } from "./checkbox/Checkbox";
 
-export const PrefectureCheckboxes = () => {
+export const PrefectureCheckboxes = memo(() => {
   return (
     <SDiv>
       <ul>
@@ -12,7 +13,7 @@ export const PrefectureCheckboxes = () => {
       </ul>
     </SDiv>
   );
-};
+});
 
 const SDiv = styled.div`
   width: 100%;
