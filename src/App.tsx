@@ -21,7 +21,12 @@ function App() {
     <div className="App">
       <body>
         <Text fontSize="15px">都道府県</Text>
-        <PrefectureCheckboxes />
+        {prefectures ? (
+          <PrefectureCheckboxes prefectures={prefectures} />
+        ) : (
+          <Text>都道府県の取得に失敗しました</Text>
+        )}
+
         <Chart />
       </body>
     </div>

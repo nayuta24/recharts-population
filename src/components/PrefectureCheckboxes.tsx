@@ -1,14 +1,26 @@
-import { memo } from "react";
+import { memo, VFC } from "react";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { prefectures } from "../array/prefecture";
+import { prefectureState } from "../store/prefectureState";
 import { Checkbox } from "./checkbox/Checkbox";
 
-export const PrefectureCheckboxes = memo(() => {
+type Props = {
+  prefectures: [
+    {
+      number: number;
+      name: string;
+      isChecked: boolean;
+    }
+  ];
+};
+
+export const PrefectureCheckboxes: VFC<Props> = memo((props) => {
+  const { prefectures } = props;
   return (
     <SDiv>
       <ul>
         {prefectures.map((prefecture, i) => (
-          <Checkbox label={prefecture} key={i} />
+          <Checkbox label={prefecture.name} key={i} />
         ))}
       </ul>
     </SDiv>

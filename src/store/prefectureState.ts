@@ -3,5 +3,5 @@ import { prefecturesArrayType } from "../type/prefecturesArrayType";
 
 export const prefectureState = atom<prefecturesArrayType>( {
     key: 'prefectureState',
-    default:[{}]
+    default:null
 })

@@ -20,7 +20,7 @@ export const useGetPrefectures = () =>
     const getPrefectures = () =>
     {
 
-        const newPrefectures: prefecturesArrayType = [{}];
+        var newPrefectures: prefecturesArrayType = null;
         axios
             .get( url, {
                 headers: { "X-API-KEY": key },
@@ -29,14 +29,25 @@ export const useGetPrefectures = () =>
             {
                 res.data.result.map( (data:responseType) =>
                 {
-                    newPrefectures.push( {
-                        number: data.prefCode,
-                        name: data.prefName,
-                        isChecked: false
-                    } )
+                    if ( newPrefectures == null )
+                    {
+                        newPrefectures = [ {
+                            number: data.prefCode,
+                            name: data.prefName,
+                            isChecked: false
+                        }]
+                    } else
+                    {
+                        newPrefectures.push( {
+                            number: data.prefCode,
+                            name: data.prefName,
+                            isChecked: false
+                        } )
+                    }
                 } )
-                setPrefectures(newPrefectures)
-            } );
+                setPrefectures( newPrefectures )
+            } )
+            .catch();
     }
 
     return { getPrefectures }

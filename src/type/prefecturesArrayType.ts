@@ -5,4 +5,4 @@ export type prefecturesArrayType = [
         isChecked: boolean
     }
 ] |
-[ {} ]
+null
