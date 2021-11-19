@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import Chart from "./components/chart/Chart";
+import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { Chart } from "./components/chart/Chart";
 import { PrefectureCheckboxes } from "./components/PrefectureCheckboxes";
 import { Text } from "./components/text/Text";
 import { useGetPrefectures } from "./hooks/useGetPrefectures";
 import { prefectureState } from "./store/prefectureState";
-import { prefecturesArrayType } from "./type/prefecturesArrayType";
-import { prefecturesType } from "./type/prefectureType";
 
 function App() {
   const { getPrefectures } = useGetPrefectures();
@@ -15,13 +13,6 @@ function App() {
   useEffect(() => {
     getPrefectures();
   }, []);
-
-  // 各県の情報が変更されたら更新する
-  // const [prefs, setPrefs] = useState<prefecturesArrayType>();
-  // useEffect(() => {
-  //   console.log(prefectures);
-  //   setPrefs(prefectures);
-  // }, [prefectures]);
 
   return (
     <div className="App">

@@ -1,6 +1,4 @@
-import axios from "axios";
-import env from "../../apiData.json";
-
+import { useEffect, useState } from "react";
 import {
   LineChart,
   Line,
@@ -10,43 +8,55 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+import { useRecoilValue } from "recoil";
+import { useGetPopulation } from "../../hooks/useGetPopulation";
+import { prefectureState } from "../../store/prefectureState";
 
-const data = [
+const defaultData = [
   {
     name: "1980",
-    uv: 4000,
-    pv: 2400,
     amt: 2400,
   },
   {
     name: "1990",
-    uv: 3000,
-    pv: 1398,
     amt: 2210,
   },
   {
     name: "2000",
-    uv: 2000,
-    pv: 9800,
     amt: 2290,
   },
   {
     name: "2010",
-    uv: 2780,
-    pv: 3908,
     amt: 2000,
   },
   {
     name: "2020",
-    uv: 1890,
-    pv: 4800,
     amt: 2181,
   },
 ];
 
-export default function Chart() {
-  const url = env.url.prefectures;
-  const key = env.key.resasKey;
+export const Chart = () => {
+  const { getPopulation, population } = useGetPopulation();
+  const prefectures = useRecoilValue(prefectureState);
+  const [data, setData] = useState(defaultData);
+
+  useEffect(() => {
+    getPopulation(1);
+    console.log(population);
+  }, []);
+
+  useEffect(() => {
+    prefectures?.map((prefecture) => {
+      if (prefecture.isChecked) {
+        getPopulation(prefecture.number);
+        console.log(population);
+      }
+    });
+  }, [prefectures]);
+
+  //   useEffect(() => {
+  //     console.log(data);
+  //   }, [data]);
 
   return (
     <LineChart
@@ -65,13 +75,8 @@ export default function Chart() {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line
-        type="monotone"
-        dataKey="pv"
-        stroke="#8884d8"
-        activeDot={{ r: 8 }}
-      />
-      <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
+      <Line type="monotone" dataKey="熊本" stroke="#8884d8" />
+      <Line type="monotone" dataKey="北海道" stroke="#82ca9d" />
     </LineChart>
   );
-}
+};

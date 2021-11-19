@@ -1,10 +1,9 @@
-import { memo, useEffect, useState, VFC } from "react";
+import { memo, VFC } from "react";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 
 import { prefectureState } from "../../store/prefectureState";
 import { prefecturesArrayType } from "../../type/prefecturesArrayType";
-import { prefecturesType } from "../../type/prefectureType";
 
 type Props = {
   label: string;
@@ -15,9 +14,7 @@ type Props = {
 export const Checkbox: VFC<Props> = memo((props) => {
   const { label, number, index } = props;
   const [prefectures, setPrefectures] = useRecoilState(prefectureState);
-  const [isChecked, setIsChecked] = useState<boolean>(false);
 
-  //
   const onChange = () => {
     if (prefectures) {
       const newPrefecture: prefecturesArrayType = [...prefectures];

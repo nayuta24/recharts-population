@@ -3,6 +3,7 @@
         "resasKey": "SVnYtlTUi1gIZED9qGi6KUXEle09AQYHoHeSxMr1"
     },
     "url":{
-        "prefectures": "https://opendata.resas-portal.go.jp/api/v1/prefectures"
+        "prefectures": "https://opendata.resas-portal.go.jp/api/v1/prefectures",
+        "population": "https://opendata.resas-portal.go.jp/api/v1/population/composition/perYear?prefCode="
     }
 }
