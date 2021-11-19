@@ -1,4 +1,6 @@
-import React from "react";
+import axios from "axios";
+import env from "../../apiData.json";
+
 import {
   LineChart,
   Line,
@@ -43,6 +45,9 @@ const data = [
 ];
 
 export default function Chart() {
+  const url = env.url.prefectures;
+  const key = env.key.resasKey;
+
   return (
     <LineChart
       width={350}

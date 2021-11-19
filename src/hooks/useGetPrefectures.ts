@@ -2,7 +2,7 @@ import axios from "axios";
 import { useSetRecoilState } from "recoil";
 
 import env from "../apiData.json"
-import { prefectureState }from "../store/prefectureState"
+import { prefectureState } from "../store/prefectureState"
 import { prefecturesArrayType } from "../type/prefecturesArrayType";
 
 type responseType = {

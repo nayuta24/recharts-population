@@ -1,18 +1,48 @@
-import { memo, VFC } from "react";
+import { memo, useEffect, useState, VFC } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
+
+import { prefectureState } from "../../store/prefectureState";
+import { prefecturesArrayType } from "../../type/prefecturesArrayType";
+import { prefecturesType } from "../../type/prefectureType";
 
 type Props = {
   label: string;
-  key?: number;
+  number: number;
+  index: number;
 };
 
 export const Checkbox: VFC<Props> = memo((props) => {
-  const { label, key } = props;
+  const { label, number, index } = props;
+  const [prefectures, setPrefectures] = useRecoilState(prefectureState);
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+
+  //
+  const onChange = () => {
+    if (prefectures) {
+      const newPrefecture: prefecturesArrayType = [...prefectures];
+      newPrefecture[index] = {
+        number: newPrefecture[index].number,
+        name: newPrefecture[index].name,
+        isChecked: !newPrefecture[index].isChecked,
+      };
+      setPrefectures(newPrefecture);
+    }
+  };
+
   return (
-    <SLi key={key} data-testid="key">
-      <input type="checkbox" />
-      <SLabel htmlFor="checkPrefecture">{label}</SLabel>
-    </SLi>
+    <>
+      {prefectures && (
+        <SLi key={number} data-testid="key">
+          <input
+            type="checkbox"
+            onChange={onChange}
+            checked={prefectures[index].isChecked}
+          />
+          <SLabel htmlFor="checkPrefecture">{label}</SLabel>
+        </SLi>
+      )}
+    </>
   );
 });
 
