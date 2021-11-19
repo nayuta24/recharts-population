@@ -12,48 +12,22 @@ import { useRecoilValue } from "recoil";
 import { useGetPopulation } from "../../hooks/useGetPopulation";
 import { prefectureState } from "../../store/prefectureState";
 
-const defaultData = [
-  {
-    name: "1980",
-    amt: 2400,
-  },
-  {
-    name: "1990",
-    amt: 2210,
-  },
-  {
-    name: "2000",
-    amt: 2290,
-  },
-  {
-    name: "2010",
-    amt: 2000,
-  },
-  {
-    name: "2020",
-    amt: 2181,
-  },
-];
-
 export const Chart = () => {
   const { getPopulation, population } = useGetPopulation();
   const prefectures = useRecoilValue(prefectureState);
-  const [data, setData] = useState(defaultData);
-
+  const [data, setData] = useState([{}]);
+  // 県がチェックされるたびに更新
   useEffect(() => {
-    getPopulation(1);
-    console.log(population);
-  }, []);
-
-  useEffect(() => {
-    prefectures?.map((prefecture) => {
-      if (prefecture.isChecked) {
-        getPopulation(prefecture.number);
-        console.log(population);
-      }
-    });
+    getPopulation();
   }, [prefectures]);
 
+  // 「getPopulation()」の処理が終了し、populationが更新されたらデータを更新する
+  useEffect(() => {
+    // setData([...population]);
+    console.log(population);
+  }, [population]);
+
+  // きちんとデータが更新されたかを確認する
   //   useEffect(() => {
   //     console.log(data);
   //   }, [data]);
@@ -62,7 +36,7 @@ export const Chart = () => {
     <LineChart
       width={350}
       height={240}
-      data={data}
+      data={population}
       margin={{
         top: 5,
         right: 30,
@@ -71,12 +45,20 @@ export const Chart = () => {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
+      <XAxis dataKey="name" tick={{ fontSize: 12 }} />
+      <YAxis type="number" domain={[0, 8000000]} tick={{ fontSize: 12 }} />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="熊本" stroke="#8884d8" />
+      <Line type="monotone" dataKey="熊本県" stroke="#8884d8" />
       <Line type="monotone" dataKey="北海道" stroke="#82ca9d" />
+      <Line type="monotone" dataKey="長崎県" stroke="blue" />
+
+      {prefectures &&
+        prefectures.map((prefecture) => {
+          if (prefecture.isChecked) {
+            <Line type="monotone" dataKey={prefecture.name} stroke="#82ca9d" />;
+          }
+        })}
     </LineChart>
   );
 };

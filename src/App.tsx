@@ -16,16 +16,14 @@ function App() {
 
   return (
     <div className="App">
-      <body>
-        <Text fontSize="15px">都道府県</Text>
-        {/* 各県の情報をapiから取得でき次第「PrefectureCheckboxes」を表示する */}
-        {prefectures ? (
-          <PrefectureCheckboxes prefectures={prefectures} />
-        ) : (
-          <Text>ロード中です</Text>
-        )}
-        <Chart />
-      </body>
+      <Text fontSize="15px">都道府県</Text>
+      {/* 各県の情報をapiから取得でき次第「PrefectureCheckboxes」を表示する */}
+      {prefectures ? (
+        <PrefectureCheckboxes prefectures={prefectures} />
+      ) : (
+        <Text>ロード中です</Text>
+      )}
+      <Chart />
     </div>
   );
 }
