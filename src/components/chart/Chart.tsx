@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState, VFC } from "react";
 import {
   LineChart,
   Line,
@@ -8,35 +8,19 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { useRecoilValue } from "recoil";
-import { useGetPopulation } from "../../hooks/useGetPopulation";
-import { prefectureState } from "../../store/prefectureState";
 
-export const Chart = () => {
-  const { getPopulation, population } = useGetPopulation();
-  const prefectures = useRecoilValue(prefectureState);
-  const [data, setData] = useState([{}]);
-  // 県がチェックされるたびに更新
-  useEffect(() => {
-    getPopulation();
-  }, [prefectures]);
+type Props = {
+  data: Object[];
+};
 
-  // 「getPopulation()」の処理が終了し、populationが更新されたらデータを更新する
-  useEffect(() => {
-    // setData([...population]);
-    console.log(population);
-  }, [population]);
-
-  // きちんとデータが更新されたかを確認する
-  //   useEffect(() => {
-  //     console.log(data);
-  //   }, [data]);
+export const Chart: VFC<Props> = (props) => {
+  const { data } = props;
 
   return (
     <LineChart
       width={350}
       height={240}
-      data={population}
+      data={data}
       margin={{
         top: 5,
         right: 30,
@@ -47,18 +31,12 @@ export const Chart = () => {
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" tick={{ fontSize: 12 }} />
       <YAxis type="number" domain={[0, 8000000]} tick={{ fontSize: 12 }} />
-      <Tooltip />
       <Legend />
       <Line type="monotone" dataKey="熊本県" stroke="#8884d8" />
       <Line type="monotone" dataKey="北海道" stroke="#82ca9d" />
       <Line type="monotone" dataKey="長崎県" stroke="blue" />
-
-      {prefectures &&
-        prefectures.map((prefecture) => {
-          if (prefecture.isChecked) {
-            <Line type="monotone" dataKey={prefecture.name} stroke="#82ca9d" />;
-          }
-        })}
+      <Line type="monotone" dataKey="東京都" stroke="blue" />
+      <Line type="monotone" dataKey="大阪府" stroke="blue" />
     </LineChart>
   );
 };

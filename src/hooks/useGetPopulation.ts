@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useRecoilValue } from "recoil";
+
 import env from "../apiData.json";
 import { prefectureState } from "../store/prefectureState";
 import { populationType } from "../type/populationType";
@@ -15,7 +16,7 @@ const key = env.key.resasKey;
 
 export const useGetPopulation = () =>
 {
-    const [ population, setPopulation ] = useState<Array<Object>>( [] );
+    const [ population, setPopulation ] = useState<Array<Object>>( [{}] );
     const prefectures = useRecoilValue( prefectureState );
     const getPopulation = () =>
     {
@@ -46,6 +47,7 @@ export const useGetPopulation = () =>
                 })
             }
         } )
+        return(population)
     }
     return{getPopulation, population}
 }

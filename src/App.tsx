@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import { Chart } from "./components/chart/Chart";
 import { PrefectureCheckboxes } from "./components/PrefectureCheckboxes";
 import { Text } from "./components/text/Text";
+import { useGetPopulation } from "./hooks/useGetPopulation";
 import { useGetPrefectures } from "./hooks/useGetPrefectures";
 import { prefectureState } from "./store/prefectureState";
 
@@ -14,6 +15,13 @@ function App() {
     getPrefectures();
   }, []);
 
+  const { getPopulation, population } = useGetPopulation();
+
+  // 県がチェックされるたびに更新
+  useEffect(() => {
+    getPopulation();
+  }, [prefectures]);
+
   return (
     <div className="App">
       <Text fontSize="15px">都道府県</Text>
@@ -23,7 +31,7 @@ function App() {
       ) : (
         <Text>ロード中です</Text>
       )}
-      <Chart />
+      <Chart data={population} />
     </div>
   );
 }
